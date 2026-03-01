@@ -82,8 +82,8 @@ os.makedirs("example/e_ml_model/plots", exist_ok=True)
 plt.figure(figsize=(8, 6))
 sns.scatterplot(
     data=test_df,
-    x='',
-    y='',
+    x='Sweetness',
+    y='Ripeness',
     hue='correct',
     style='correct',
     s=100,

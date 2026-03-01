@@ -2,12 +2,12 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-from hode import human_checker as human_classify
-from fetch_data import load_apple_data_from_csv
+from Human_Algorithm.fetch_data import load_apple_data_from_csv
+from Human_Algorithm.hode import human_checker as human_classify
 from sklearn.model_selection import train_test_split
 
 # This section of code separates the whole data-set into training and testing data.
-df, target_name = load_apple_data_from_csv()
+df, target_name = load_apple_data_from_csv(fetch_data.file_path)
 train_df, test_df = train_test_split(
     df,
     test_size=0.3,
