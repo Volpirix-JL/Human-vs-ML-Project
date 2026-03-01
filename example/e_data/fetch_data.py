@@ -29,3 +29,7 @@ def load_iris_data():
     # print(df.head())
 
     return df, target_name
+
+df, target_name = load_iris_data()
+
+print(df.columns.tolist())
