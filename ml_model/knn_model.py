@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from Human_Algorithm.fetch_data import load_apple_data_from_csv
+from fetch_data import load_apple_data_from_csv
 
 df, target_name = load_apple_data_from_csv()
 

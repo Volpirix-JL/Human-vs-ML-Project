@@ -2,21 +2,16 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-from Human_Algorithm.fetch_data import load_apple_data_from_csv
-from Human_Algorithm.hode import human_checker as human_classify
+from fetch_data import load_apple_data_from_csv
+from hode import human_checker as human_classify
 from sklearn.model_selection import train_test_split
 
 # This section of code separates the whole data-set into training and testing data.
-df, target_name = load_apple_data_from_csv(fetch_data.file_path)
-train_df, test_df = train_test_split(
-    df,
-    test_size=0.3,
-    random_state=42,
-    stratify=df[target_name]
-)
+df, target_name = load_apple_data_from_csv()
+train_df, test_df = train_test_split(df, test_size=0.3, random_state=42, stratify=df[target_name])
 
 # This section of code applies the human classification algorithm to the test data.
-test_df['human_prediction'] = test_df['Ripeness','Sweetness'].apply(human_classify)
+test_df['human_prediction'] = test_df.apply(lambda row: human_classify((row['Ripeness'], row['Sweetness'])), axis=1)
 test_df['correct'] = test_df['human_prediction'] == test_df[target_name]
 accuracy = (test_df['human_prediction'] == test_df[target_name]).mean()
 print(f"Human classifier accuracy: {accuracy:.2%}")
@@ -34,7 +29,9 @@ print(conf_matrix)
 failure_row = test_df[test_df['human_prediction'] != test_df[target_name]].iloc[0]
 print("\nFAILURE EXAMPLE")
 print(failure_row[['Sweetness', 'Ripeness', target_name, 'human_prediction']])
-
+success_row = test_df[test_df['human_prediction'] == test_df[target_name]].iloc[0]
+print("\nSUCCESS EXAMPLE")
+print(success_row[['Sweetness', 'Ripeness', target_name, 'human_prediction']])
 
 # Print a scatter plot showing correct vs incorrect predictions.
 os.makedirs("example/e_ml_model/plots", exist_ok=True)
@@ -55,5 +52,5 @@ plt.xlabel('Sweetness')
 plt.ylabel('Ripeness')
 plt.legend(title='Prediction Correct')
 plt.grid(True)
-plt.savefig('example/e_human_algorithm/plots/human_model_training_results.png', dpi=150)
+plt.savefig(f'plots/human_model_training_results.png', dpi=150)
 plt.close()
