@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import os
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from fetch_data import load_apple_data_from_csv
+from Human_Algorithm.fetch_data import load_apple_data_from_csv
 
 df, target_name = load_apple_data_from_csv()
 
-# I selected only the petal length and petal width features for classification.
+
 X = df[['Sweetness', 'Ripeness']] #Ripeness, sweetness, or/and acididitty
 y = df[target_name]
 
@@ -20,9 +20,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# I selected k=1 for the KNN classifier.
-k = 3
-knn = KNeighborsClassifier(n_neighbors=k)
+# I selected k=50 for the KNN classifier.
+k = 50
+knn = KNeighborsClassifier(n_neighbors=k, weights ='uniform')
 knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)
 y_train_pred = knn.predict(X_train)
@@ -95,5 +95,5 @@ plt.xlabel('Sweetness')
 plt.ylabel('Ripeness')
 plt.legend(title='Prediction Correct')
 plt.grid(True)
-plt.savefig('example/e_ml_model/plots/knn_model_test_results.png', dpi=150)
+plt.savefig(f'plots/knn_model_test_results.png', dpi=150)
 plt.close()

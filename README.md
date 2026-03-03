@@ -18,22 +18,22 @@ You may work alone or with a partner. You may choose to work with the provided P
 ---
 
 **Team Members:**  
-- Name 1  
-- Name 2 (if applicable)  
+- Name 1  Jamar Looney
+- Name 2 Carson Harrel
 
 **Dataset Used:**  
-(e.g. Penguins, Iris, Titanic, etc.)
+Apple Quality
 
 **Source:**  
-(UCI / Kaggle / Provided dataset)
+Kaggle
 
 **Target Variable (What we are predicting):**  
-(e.g. species, survival, diagnosis)
+Quality
 
 **Features Used:**  
-- Feature 1  
-- Feature 2  
-- Feature 3
+- Acidity
+- Sweetness  
+- Ripeness
 
 **[Video Review](https://)**
 
@@ -43,26 +43,28 @@ You may work alone or with a partner. You may choose to work with the provided P
 ```text
 Write your human decision rules here.
 ```
+if ripeness > 1.5 and sweetness > 0: Good
+if ripeness > 1.5 and sweetness < 0: Bad
+if ripeness < 1.5 and sweetness < 0: Good
+if ripeness < 1.5 and sweetness > 0: Bad
+When examining the data and visualizations, we focused on the features ripeness and sweetness because they were the only ones with any correlation.
 
-When examining the data and visualizations, we focused on the features ___ and ___ because ___.
+The plots/tables suggested a possible threshold for 1, and we considered values above or below this point to see how they might relate to quality.
 
-The plots/tables suggested a possible threshold for ___, and we considered values above or below this point to see how they might relate to ___.
-
-From the summary tables and visualizations, it appeared that ___ could influence classification, which led us to ___ in our decision rules.
+From the summary tables and visualizations, it appeared that ripeness and sweetness could influence classification, which led us to use them in our decision rules.
 
 ### Confusion Matrix
 
-Accuracy: ?
+Accuracy: 56.08%
 
-| Actual \ Predicted | Class 1 | Class 2 | Class 3 |
-|-------------------|---------|---------|---------|
-| **Class 1**       |         |         |         |
-| **Class 2**       |         |         |         |
-| **Class 3**       |         |         |         |
+| Actual \ Predicted| good    | bad     |
+|-------------------|---------|---------|
+| **good**          | 325     | 276     |
+| **bad**           | 251     |    348  |
 
-One example where our algorithm worked well is when the inputs were ___, leading to a correct prediction of ___ because ___.
+One example where our algorithm worked well is when the inputs were 2.34 sweetness and -.30 ripeness, leading to a correct prediction of bad because the ripeness is less than 1.5 and the sweetness is more than 0.
 
-An example where the algorithm did not perform as expected is when the inputs were ___, resulting in a prediction of ___ instead of ___, which may have happened because ___.
+An example where the algorithm did not perform as expected is when the inputs were 3.6 sweetness an, 1.2 ripeness resulting in a prediction of bad instead of good, which may have happened because it wasn't considered to be ripe enough.
 
 These examples of success and failure highlight patterns in the data or limitations in our rules, such as ___.
 
@@ -70,26 +72,29 @@ These examples of success and failure highlight patterns in the data or limitati
 
 ## Machine Learning Model
 
-We chose a value of k = ___ after comparing model performance across different values of k and observing that ___.
+We chose a value of k = 50 after comparing model performance across different values of k and observing that it yielded the highest accuracy with uniform weights.
 
-When analyzing the outputs and metrics, we noticed that changing k affected ___, which influenced our final choice.
+When analyzing the outputs and metrics, we noticed that changing k affected accuracy, which influenced our final choice.
 
-Based on the results shown in the tables or visualizations, k = ___ best matched our goals for model performance because ___.
+Based on the results shown in the tables or visualizations, k = 50 best matched our goals for model performance because it increased the machine accuracy the best.
 
 ### Confusion Matrix
 
-Accuracy: ?
+Accuracy: 65.67%
 
-| Actual \ Predicted | Class 1 | Class 2 | Class 3 |
-|-------------------|---------|---------|---------|
-| **Class 1**       |         |         |         |
-| **Class 2**       |         |         |         |
-| **Class 3**       |         |         |         |
+| Actual \ Predicted |   bad   |  good   |
+|--------------------|---------|---------|
+|         bad        |   385   |   214   |
+|         good       |   198   |   403   |
+|----------------------------------------|
 
-The table/visualization shows a clear pattern where the model predicts ___ when ___, indicating a strong relationship between these features.
+The table/visualization shows a clear pattern where the model predicts bad when ripeness is greater than 2 and sweetness is less than -1, indicating a strong relationship between these features.
 
-The confusion matrix reveals that the model most often confuses ___ with ___, suggesting these classes have similar feature values.
+The confusion matrix reveals that the model most often confuses good and bad when the numbers are closer to 0, suggesting these classes have similar feature values.
 
-Compared to the human algorithm, the KNN model shows different behavior when ___, as seen in the ___ visualization.
+Compared to the human algorithm, the KNN model shows different behavior when values are closer to 0, as seen in the both visualizatios.
 
 <img width="315" height="334" alt="image" src="https://github.com/user-attachments/assets/199ae59d-3470-40c6-9669-60e62b211619" />
+![alt text](plots/knn_model_test_results.png)
+
+![alt text](plots/human_model_training_results.png)
