@@ -35,7 +35,7 @@ Quality
 - Sweetness  
 - Ripeness
 
-**[Video Review](https://)**
+**[Video Review](https://www.loom.com/share/15b51630dd554cf6845928ae091bc7d5)**
 
 ## Human Algorithm
 
